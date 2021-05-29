@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class TankShooting : MonoBehaviour
 {
@@ -47,7 +48,8 @@ public class TankShooting : MonoBehaviour
             m_CurrentLaunchForce = m_MaxLaunchForce;
             Fire();
         }
-        else if(Input.GetButtonDown(m_FireButton))
+        //else if(Input.GetButtonDown(m_FireButton))
+        else if (CrossPlatformInputManager.GetButtonDown(m_FireButton))
         {
             //have we pressed fire for the first time?
             m_Fired = false;
@@ -56,13 +58,15 @@ public class TankShooting : MonoBehaviour
             m_ShootingAudio.clip = m_ChargingClip;
             m_ShootingAudio.Play();
         }
-        else if(Input.GetButton(m_FireButton) && !m_Fired)
+        //else if(Input.GetButton(m_FireButton) && !m_Fired)
+        else if (CrossPlatformInputManager.GetButton(m_FireButton) && !m_Fired)
         {
             //Holding the fire button but not yet fired
             m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
             m_AimSlider.value = m_CurrentLaunchForce;
         }
-        else if(Input.GetButtonUp(m_FireButton) && !m_Fired)
+        //else if(Input.GetButtonUp(m_FireButton) && !m_Fired)
+        else if (CrossPlatformInputManager.GetButtonUp(m_FireButton) && !m_Fired)
         {
             //we realsed the button, having not fired yet
             Fire();
